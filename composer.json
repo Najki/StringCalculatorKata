@@ -1,0 +1,14 @@
+{
+  "name": "najki/string-calculator-cata",
+  "description": "A PHP String Calculator code kata project",
+  "authors": [
+    {
+      "name": "Nikodem Osmialowski",
+      "email": "nikodem@osmialowski.pl",
+      "homepage": "http://osmialowski.pl/"
+    }
+  ],
+  "require-dev": {
+    "phpspec/phpspec": "~2.5"
+  }
+}
