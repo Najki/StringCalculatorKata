@@ -2,6 +2,8 @@
 
 namespace Najki;
 
+use Najki\Exception\NegativesNotAllowedException;
+
 /**
  * @author    Nikodem Osmialowski
  * @copyright Codeco
@@ -20,6 +22,10 @@ class StringCalculator
         }
 
         $numbers = $this->splitString($numbers);
+
+        if (!empty($negatives = $this->getNegativeNumbers($numbers))) {
+            throw new NegativesNotAllowedException($negatives);
+        }
 
         return array_sum($numbers);
     }
@@ -60,5 +66,22 @@ class StringCalculator
         }
 
         throw new \InvalidArgumentException();
+    }
+
+    /**
+     * @param int[] $numbers
+     * @return int[]
+     */
+    private function getNegativeNumbers(array $numbers)
+    {
+        $negatives = [];
+
+        foreach ($numbers as $number) {
+            if ($number < 0) {
+                $negatives[] = $number;
+            }
+        }
+
+        return $negatives;
     }
 }
