@@ -39,4 +39,14 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->add("1\n2,3")->shouldReturn(6);
     }
+
+    function it_should_sum_string_with_custom_delimiter()
+    {
+        $this->add("//#\n1#2#")->shouldReturn(3);
+    }
+
+    function it_should_fail_on_invalid_custom_delimiter()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('add', ["//####\n1,2,3"]);
+    }
 }

@@ -30,6 +30,35 @@ class StringCalculator
      */
     private function splitString($numbers)
     {
-        return preg_split('/(,|\n)/', $numbers);
+        $delimiterPattern = ',|\n';
+
+        if ($this->hasCustomDelimiter($numbers)) {
+            $delimiterPattern .= '|'.preg_quote($this->getCustomDelimiter($numbers), '/');
+            $numbers = preg_replace('#^//.\n#', '', $numbers);
+        }
+
+        return preg_split('/('.$delimiterPattern.')/', $numbers);
+    }
+
+    /**
+     * @param string $string
+     * @return bool
+     */
+    private function hasCustomDelimiter($string)
+    {
+        return preg_match('#^//.#', $string);
+    }
+
+    /**
+     * @param string $string
+     * @return string|bool
+     */
+    private function getCustomDelimiter($string)
+    {
+        if (preg_match('#^//(.)\n#', $string, $matches)) {
+            return $matches[1];
+        }
+
+        throw new \InvalidArgumentException();
     }
 }
