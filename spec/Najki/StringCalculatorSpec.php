@@ -25,4 +25,9 @@ class StringCalculatorSpec extends ObjectBehavior
         $this->add('1,2')->shouldReturn(3);
         $this->add('4,5')->shouldReturn(9);
     }
+
+    function it_should_sum_string_with_more_numbers()
+    {
+        $this->add('1,3,5,6,7')->shouldReturn(22);
+    }
 }
