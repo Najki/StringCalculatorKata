@@ -24,8 +24,12 @@ class StringCalculator
         return array_sum($numbers);
     }
 
+    /**
+     * @param string $numbers
+     * @return array
+     */
     private function splitString($numbers)
     {
-        return $numbers = explode(',', $numbers);
+        return preg_split('/(,|\n)/', $numbers);
     }
 }

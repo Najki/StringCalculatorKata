@@ -34,4 +34,9 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->add('1,3,5,6,7')->shouldReturn(22);
     }
+
+    function it_should_sum_string_with_eol_as_delimiter()
+    {
+        $this->add("1\n2,3")->shouldReturn(6);
+    }
 }
