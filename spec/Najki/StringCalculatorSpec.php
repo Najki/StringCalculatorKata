@@ -13,6 +13,11 @@ class StringCalculatorSpec extends ObjectBehavior
         $this->shouldHaveType(StringCalculator::class);
     }
 
+    function it_should_fail_when_non_string_passed()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('add', [null]);
+    }
+
     function it_should_sum_numbers()
     {
         $this->add('')->shouldReturn(0);
