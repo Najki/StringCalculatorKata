@@ -2,6 +2,10 @@
 
 namespace Najki;
 
+/**
+ * @author    Nikodem Osmialowski
+ * @copyright Codeco
+ */
 class StringCalculator
 {
     /**
@@ -15,8 +19,13 @@ class StringCalculator
             throw new \InvalidArgumentException();
         }
 
-        $numbers = explode(',', $numbers);
+        $numbers = $this->splitString($numbers);
 
         return array_sum($numbers);
+    }
+
+    private function splitString($numbers)
+    {
+        return $numbers = explode(',', $numbers);
     }
 }

@@ -6,6 +6,10 @@ use Najki\StringCalculator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author    Nikodem Osmialowski
+ * @copyright Codeco
+ */
 class StringCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
