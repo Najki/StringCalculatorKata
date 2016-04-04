@@ -46,9 +46,9 @@ class StringCalculatorSpec extends ObjectBehavior
         $this->add("//#\n1#2#")->shouldReturn(3);
     }
 
-    function it_should_fail_on_invalid_custom_delimiter()
+    function it_should_sum_string_with_multichar_custom_delimiter()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('add', ["//####\n1,2,3"]);
+        $this->add("//[@@]\n2@@3@@4")->shouldReturn(9);
     }
 
     function it_should_throw_an_exception_when_string_has_negative_numbers()
