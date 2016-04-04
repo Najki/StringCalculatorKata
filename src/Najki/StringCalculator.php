@@ -10,6 +10,8 @@ use Najki\Exception\NegativesNotAllowedException;
  */
 class StringCalculator
 {
+    const MAX_NUMBER = 1000;
+
     /**
      * @param string $numbers
      * @return int
@@ -26,6 +28,8 @@ class StringCalculator
         if (!empty($negatives = $this->getNegativeNumbers($numbers))) {
             throw new NegativesNotAllowedException($negatives);
         }
+
+        $numbers = $this->filterNumbers($numbers);
 
         return array_sum($numbers);
     }
@@ -83,5 +87,16 @@ class StringCalculator
         }
 
         return $negatives;
+    }
+
+    /**
+     * @param int[] $numbers
+     * @return int[]
+     */
+    private function filterNumbers(array $numbers)
+    {
+        return array_filter($numbers, function ($value) {
+            return $value <= self::MAX_NUMBER;
+        });
     }
 }

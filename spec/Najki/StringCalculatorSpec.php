@@ -55,4 +55,9 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->shouldThrow(NegativesNotAllowedException::class)->during('add', ['1,-2']);
     }
+
+    function it_should_ignore_large_numbers()
+    {
+        $this->add('2,1001')->shouldReturn(2);
+    }
 }
