@@ -65,4 +65,9 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->add("//[%][^]\n1%2^3")->shouldReturn(6);
     }
+
+    function it_should_sum_string_with_multiple_multichar_custom_delimiters()
+    {
+        $this->add("//[``][@][%][%%]\n1``2%3%%4")->shouldReturn(10);
+    }
 }
