@@ -60,4 +60,9 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->add('2,1001')->shouldReturn(2);
     }
+
+    function it_should_sum_string_with_multiple_custom_delimiters()
+    {
+        $this->add("//[%][^]\n1%2^3")->shouldReturn(6);
+    }
 }

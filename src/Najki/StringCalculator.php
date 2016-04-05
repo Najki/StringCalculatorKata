@@ -41,10 +41,13 @@ class StringCalculator
     private function splitString($numbers)
     {
         $delimiterPattern = ',|\n';
-        $customDelimiter = $this->getCustomDelimiter($numbers);
+        $customDelimiters = $this->getCustomDelimiters($numbers);
 
-        if ($customDelimiter) {
-            $delimiterPattern .= '|'.preg_quote($customDelimiter, '/');
+        if (!empty($customDelimiters)) {
+            foreach ($customDelimiters as $customDelimiter) {
+                $delimiterPattern .= '|'.preg_quote($customDelimiter, '/');
+            }
+
             $numbers = preg_replace('#^//.\n#', '', $numbers);
         }
 
@@ -53,19 +56,25 @@ class StringCalculator
 
     /**
      * @param string $string
-     * @return string|null
+     * @return string[]
      */
-    private function getCustomDelimiter($string)
+    private function getCustomDelimiters($string)
     {
-        if (preg_match('#^//\[(.+)\]\n#', $string, $matches)) {
-            return $matches[1];
+        if (preg_match('#^//.+\n#', $string)) {
+            $firstLine = substr($string, 0, strpos($string, "\n") + 1);
+
+            if (preg_match_all('#\[([^\[\]]+)\]#', $firstLine, $matches)) {
+                return $matches[1];
+            }
         }
 
         if (preg_match('#^//(.)\n#', $string, $matches)) {
-            return $matches[1];
+            return [
+                $matches[1]
+            ];
         }
 
-        return null;
+        return [];
     }
 
     /**
